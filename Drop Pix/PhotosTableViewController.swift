@@ -54,6 +54,26 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         }
     }
     
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        var footerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("footerView")
+        
+        if footerView == nil {
+            footerView = UITableViewHeaderFooterView(reuseIdentifier: "footerView")
+            footerView?.frame = CGRectMake(0, 0, view.bounds.size.width, 49)
+            
+            let backgroundView = UIView(frame: footerView!.frame)
+            backgroundView.backgroundColor = .whiteColor()
+            
+            footerView?.contentView.addSubview(backgroundView)
+        }
+        
+        return footerView
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 49
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("photoCell", forIndexPath: indexPath)
         
@@ -62,6 +82,12 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         let fileName = fileNames[indexPath.row]
         let dict = myContents[fileName] as! [String: AnyObject]
         let file = dict["file"] as! DBMetadata
+        
+        let localDir = NSTemporaryDirectory()
+        let localPath = localDir.stringByAppendingString(file.filename)
+        
+        restClient.loadFile(file.path, intoPath: localPath)
+        
         /*
         TODO: Add this when titles are less ugly
         cell.detailTextLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
@@ -140,8 +166,6 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
                     
                     let localDir = NSTemporaryDirectory()
                     let localPath = localDir.stringByAppendingString(file.filename)
-                    
-                    restClient.loadFile(file.path, intoPath: localPath)
                     
                     let thumbPath = localPath.stringByAppendingString("_THUMB")
                     restClient.loadThumbnail(file.path, ofSize: "xs", intoPath: thumbPath)
