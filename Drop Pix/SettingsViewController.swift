@@ -10,10 +10,18 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        parentViewController?.navigationItem.title = "Settings"
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +29,12 @@ class SettingsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Custom Methods
+    
+    @IBAction func logoutButtonTouchUpInside(sender: AnyObject) {
+        DBSession.sharedSession().unlinkAll()
+        performSegueWithIdentifier("SettingsVCToLoginVCUnwindSegue", sender: nil)
+    }
 
     /*
     // MARK: - Navigation

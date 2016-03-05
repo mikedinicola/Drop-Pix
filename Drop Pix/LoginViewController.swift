@@ -46,5 +46,9 @@ class LoginViewController: UIViewController {
     func segueToNavController() {
         performSegueWithIdentifier("LoginVCToNavControllerModalSegue", sender: nil)
     }
+    
+    @IBAction func unwindToLoginVC (segue : UIStoryboardSegue) {
+        NSLog("%@", segue.identifier!)
+    }
 }
 

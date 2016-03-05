@@ -18,19 +18,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftI-jr-bkf">
-                                <rect key="frame" x="225" y="283" width="150" height="34"/>
+                                <rect key="frame" x="216" y="438" width="168" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Sign In to Dropbox"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="  Sign In to Dropbox  ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="signInButtonTouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uiI-nT-9LJ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drop Pix" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ld8-so-EPG">
+                                <rect key="frame" x="243" y="148" width="114.5" height="41"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="34"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ftI-jr-bkf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="22N-8m-URg"/>
                             <constraint firstItem="ftI-jr-bkf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PxF-Ne-OQG"/>
+                            <constraint firstItem="Ld8-so-EPG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="128" id="Rt2-V0-6nn"/>
+                            <constraint firstItem="Ld8-so-EPG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nv9-c6-MSx"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ftI-jr-bkf" secondAttribute="bottom" constant="128" id="uRC-W2-V2M"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="22N-8m-URg"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <segue destination="NLC-o1-WhR" kind="presentation" identifier="LoginVCToNavControllerModalSegue" modalTransitionStyle="crossDissolve" id="mlT-4K-Nln"/>
@@ -69,9 +92,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOs-bc-68Y">
-                                <rect key="frame" x="271.5" y="283" width="57" height="34"/>
+                                <rect key="frame" x="262" y="283" width="76" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Logout"/>
+                                <state key="normal" title="  Logout  ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="logoutButtonTouchUpInside:" destination="QbK-6z-JGK" eventType="touchUpInside" id="DXJ-57-cZe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,8 +115,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" id="xev-eu-ppK"/>
+                    <connections>
+                        <segue destination="4yr-Uc-pbZ" kind="unwind" identifier="SettingsVCToLoginVCUnwindSegue" unwindAction="unwindToLoginVC:" id="srN-pu-FN5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DAg-37-mDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="4yr-Uc-pbZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1907" y="1285"/>
         </scene>

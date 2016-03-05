@@ -37,7 +37,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         picButton = UIButton(type: .System)
         picButton!.frame = CGRectMake(view.frame.size.width/3*1, 0, view.frame.size.width/3, tabBarHeight)
-        picButton!.backgroundColor = .darkGrayColor()
+        picButton!.backgroundColor = UIColor(red: 0, green: 122.0/255.0, blue: 1, alpha: 1)
         picButton?.setTitle("Camera", forState: .Normal)
         picButton?.setTitleColor(.whiteColor(), forState: .Normal)
         
