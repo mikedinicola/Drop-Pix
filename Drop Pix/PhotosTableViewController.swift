@@ -12,6 +12,8 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     var restClient: DBRestClient!
     
+    var myContents: [AnyObject]!
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -26,14 +28,9 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         restClient = DBRestClient(session: DBSession.sharedSession())
         restClient.delegate = self
         
-        restClient.loadMetadata("/Drop-Pix")
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        parentViewController?.navigationItem.title = "No Photos"
-    }
+        loadDBMetadata()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadDBMetadata", name: "DBLFileUploadedSuccessfullyNotification", object: nil)
+    }    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -43,24 +40,33 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        if myContents == nil {
+            return 0
+        } else {
+            return myContents.count
+        }
     }
     
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-    
-    // Configure the cell...
-    
-    return cell
+        let cell = tableView.dequeueReusableCellWithIdentifier("photoCell", forIndexPath: indexPath)
+        
+        // Configure the cell...
+        
+        let file = myContents[indexPath.row] as! DBMetadata
+        cell.textLabel?.text = file.filename
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        cell.detailTextLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
+        
+        return cell
     }
-    */
     
     /*
     // Override to support conditional editing of the table view.
@@ -97,15 +103,30 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     }
     */
     
+    // MARK: - Custom Methods
+    
+    func loadDBMetadata() {
+        restClient.loadMetadata("/Drop-Pix")
+    }
+    
     // MARK: - DBRestClientDelegate
     
     func restClient(client: DBRestClient!, loadedMetadata metadata: DBMetadata!) {
-        if metadata.isDirectory == true {
+        if metadata.isDirectory == true && metadata.contents.count > 0 {
             NSLog("Folder '%@' contains:", metadata.path);
             for fileObject in metadata.contents {
                 let file = fileObject as! DBMetadata
                 NSLog("\t%@", file.filename);
             }
+            myContents = metadata.contents
+            if metadata.contents.count > 1 {
+                parentViewController?.navigationItem.title = String(format: "%ld Photos", metadata.contents.count)
+            } else {
+                parentViewController?.navigationItem.title = String(format: "%ld Photo", metadata.contents.count)
+            }
+            tableView.reloadData()
+        } else {
+            parentViewController?.navigationItem.title = "No Photos"
         }
     }
     

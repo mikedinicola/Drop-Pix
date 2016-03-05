@@ -83,6 +83,8 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     
     func restClient(client: DBRestClient!, uploadedFile destPath: String!, from srcPath: String!, metadata: DBMetadata!) {
         NSLog("File uploaded successfully to path: %@", metadata.path);
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("DBLFileUploadedSuccessfullyNotification", object: nil)
     }
     
     func restClient(client: DBRestClient!, uploadFileFailedWithError error: NSError!) {
