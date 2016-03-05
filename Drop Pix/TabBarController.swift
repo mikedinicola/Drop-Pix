@@ -8,8 +8,10 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DBRestClientDelegate {
 
+    var restClient: DBRestClient!
+    
     var picButton: UIButton?
     
     let tabBarHeight: CGFloat = 49
@@ -20,6 +22,9 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        restClient = DBRestClient(session: DBSession.sharedSession())
+        restClient.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -62,8 +67,28 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         dismissViewControllerAnimated(true, completion: nil)
         
         // Upload photo to Dropbox
+        
+        let filename = "TITLE.PNG"
+        let localDir = NSTemporaryDirectory()
+        let localPath = localDir.stringByAppendingString(filename)
+        
+        let imageData = NSData(data: UIImagePNGRepresentation(image)!)
+        imageData.writeToFile(localPath, atomically: true)
+
+        let destDir = "/"
+        restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)
     }
 
+    // MARK: - DBRestClientDelegate
+    
+    func restClient(client: DBRestClient!, uploadedFile destPath: String!, from srcPath: String!, metadata: DBMetadata!) {
+        NSLog("File uploaded successfully to path: %@", metadata.path);
+    }
+    
+    func restClient(client: DBRestClient!, uploadFileFailedWithError error: NSError!) {
+        NSLog("File upload failed with error: %@", error);
+    }
+    
     /*
     // MARK: - Navigation
 
