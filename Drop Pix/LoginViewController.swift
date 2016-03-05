@@ -10,15 +10,21 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    // MARK: View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "segueToNavController", name: "DBLinkedSuccessfullyNotification", object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        performSegueWithIdentifier("LoginVCToNavControllerModalSegue", sender: nil)
+        if DBSession.sharedSession().isLinked() == true {
+            segueToNavController()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +32,17 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func signInButtonTouchUpInside(sender: AnyObject) {
+        
+        if DBSession.sharedSession().isLinked() == false {
+            DBSession.sharedSession().linkFromController(self)
+        }
+    }
+    
+    // MARK: Navigation
+    
+    func segueToNavController() {
+        performSegueWithIdentifier("LoginVCToNavControllerModalSegue", sender: nil)
+    }
 }
 

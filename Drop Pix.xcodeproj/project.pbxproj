@@ -17,6 +17,9 @@
 		953AFD571C8AA6F30006BF9A /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD561C8AA6F30006BF9A /* PhotosTableViewController.swift */; };
 		953AFD591C8AA7050006BF9A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD581C8AA7050006BF9A /* TabBarController.swift */; };
 		953AFD5B1C8AA71C0006BF9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD5A1C8AA71C0006BF9A /* SettingsViewController.swift */; };
+		953AFD601C8AA7EE0006BF9A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */; };
+		953AFD621C8AA81E0006BF9A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD611C8AA81E0006BF9A /* Security.framework */; };
+		953AFD641C8AA8240006BF9A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD631C8AA8240006BF9A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,10 @@
 		953AFD561C8AA6F30006BF9A /* PhotosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
 		953AFD581C8AA7050006BF9A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		953AFD5A1C8AA71C0006BF9A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../../Downloads/dropbox-ios-sdk-1.3.13/DropboxSDK.framework"; sourceTree = "<group>"; };
+		953AFD611C8AA81E0006BF9A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		953AFD631C8AA8240006BF9A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		953AFD651C8AAB870006BF9A /* Drop-Pix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Drop-Pix-Bridging-Header.h"; path = "Drop Pix/Drop-Pix-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +67,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953AFD641C8AA8240006BF9A /* QuartzCore.framework in Frameworks */,
+				953AFD621C8AA81E0006BF9A /* Security.framework in Frameworks */,
+				953AFD601C8AA7EE0006BF9A /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +97,7 @@
 				953AFD3C1C8AA2B10006BF9A /* Drop PixTests */,
 				953AFD471C8AA2B10006BF9A /* Drop PixUITests */,
 				953AFD261C8AA2B10006BF9A /* Products */,
+				953AFD5E1C8AA7C80006BF9A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -132,6 +143,17 @@
 				953AFD4A1C8AA2B10006BF9A /* Info.plist */,
 			);
 			path = "Drop PixUITests";
+			sourceTree = "<group>";
+		};
+		953AFD5E1C8AA7C80006BF9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				953AFD651C8AAB870006BF9A /* Drop-Pix-Bridging-Header.h */,
+				953AFD631C8AA8240006BF9A /* QuartzCore.framework */,
+				953AFD611C8AA81E0006BF9A /* Security.framework */,
+				953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +366,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -364,6 +387,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -389,6 +413,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -402,6 +427,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -411,10 +437,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Drop Pix/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-Pix";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mdinicola/Dropbox/code/Drop Pix/Drop Pix/Drop-Pix-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -422,10 +455,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Drop Pix/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-Pix";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/mdinicola/Dropbox/code/Drop Pix/Drop Pix/Drop-Pix-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -496,6 +536,7 @@
 				953AFD4F1C8AA2B10006BF9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		953AFD501C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop PixTests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +545,7 @@
 				953AFD521C8AA2B10006BF9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		953AFD531C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop PixUITests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +554,7 @@
 				953AFD551C8AA2B10006BF9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
