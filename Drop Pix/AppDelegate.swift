@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let dbSession = DBSession(appKey: "d8paroznqta0fhu",
-            appSecret: "lznnsdcdsnlzh1r",
+        let dbSession = DBSession(appKey: "7fdgx6bfkp0xkkk",
+            appSecret: "titj0klur5o7dpf",
             root: kDBRootDropbox) // either kDBRootAppFolder or kDBRootDropbox
         DBSession.setSharedSession(dbSession)        
         

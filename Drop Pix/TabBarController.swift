@@ -75,7 +75,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         let imageData = NSData(data: UIImagePNGRepresentation(image)!)
         imageData.writeToFile(localPath, atomically: true)
 
-        let destDir = "/"
+        let destDir = "/Drop-Pix"
         restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)
     }
 
