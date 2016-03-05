@@ -32,7 +32,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         for i in 0...2 {
             tabBar.items![i].setTitleTextAttributes([NSFontAttributeName: UIFont.systemFontOfSize(14)], forState: .Normal)
-            tabBar.items![i].titlePositionAdjustment = UIOffsetMake(0, -tabBarHeight/3);
+            tabBar.items![i].titlePositionAdjustment = UIOffsetMake(0, -tabBarHeight/3)
         }
         
         picButton = UIButton(type: .System)
@@ -82,13 +82,13 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     // MARK: - DBRestClientDelegate
     
     func restClient(client: DBRestClient!, uploadedFile destPath: String!, from srcPath: String!, metadata: DBMetadata!) {
-        NSLog("File uploaded successfully to path: %@", metadata.path);
+        NSLog("File uploaded successfully to path: %@", metadata.path)
         
         NSNotificationCenter.defaultCenter().postNotificationName("DBLFileUploadedSuccessfullyNotification", object: nil)
     }
     
     func restClient(client: DBRestClient!, uploadFileFailedWithError error: NSError!) {
-        NSLog("File upload failed with error: %@", error);
+        NSLog("File upload failed with error: %@", error)
     }
     
     /*

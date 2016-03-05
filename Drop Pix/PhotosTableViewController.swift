@@ -12,7 +12,8 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     var restClient: DBRestClient!
     
-    var myContents: [AnyObject]!
+    var myContents: [String: AnyObject]! = [:]
+    var fileNames: [String]! = []
     
     // MARK: - View Lifecycle
     
@@ -58,12 +59,25 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         
         // Configure the cell...
         
-        let file = myContents[indexPath.row] as! DBMetadata
+        let fileName = fileNames[indexPath.row]
+        let dict = myContents[fileName] as! [String: AnyObject]
+        let file = dict["file"] as! DBMetadata
+        /*
+        TODO: Add this when titles are less ugly
+        cell.detailTextLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
         cell.textLabel?.text = file.filename
+        */
+
+        if let image = dict["image"] as? UIImage {
+            cell.imageView?.image = image
+        } else {
+            cell.imageView?.image = nil
+        }
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        cell.detailTextLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
+        cell.textLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
+        cell.detailTextLabel?.text = ""
         
         return cell
     }
@@ -113,12 +127,22 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     func restClient(client: DBRestClient!, loadedMetadata metadata: DBMetadata!) {
         if metadata.isDirectory == true && metadata.contents.count > 0 {
-            NSLog("Folder '%@' contains:", metadata.path);
+            NSLog("Folder '%@' contains:", metadata.path)
+            
             for fileObject in metadata.contents {
                 let file = fileObject as! DBMetadata
-                NSLog("\t%@", file.filename);
+                NSLog("\t%@", file.filename)
+                
+                if myContents[file.filename] == nil {
+                    myContents[file.filename] = ["file": file]
+                    fileNames.append(file.filename)
+                    
+                    let localDir = NSTemporaryDirectory()
+                    let localPath = localDir.stringByAppendingString(file.filename)
+                    
+                    restClient.loadFile(file.path, intoPath: localPath)
+                }
             }
-            myContents = metadata.contents
             if metadata.contents.count > 1 {
                 parentViewController?.navigationItem.title = String(format: "%ld Photos", metadata.contents.count)
             } else {
@@ -131,7 +155,24 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     }
     
     func restClient(client: DBRestClient!, loadMetadataFailedWithError error: NSError!) {
-        NSLog("Error loading metadata: %@", error);
+        NSLog("Error loading metadata: %@", error)
+    }
+    
+    func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
+        NSLog("File loaded into path: %@", destPath)
+        
+        let image = UIImage(contentsOfFile: destPath)
+        
+        var dict = myContents[metadata.filename] as! [String: AnyObject]
+        dict["image"] = image
+        
+        myContents[metadata.filename] = dict
+        
+        tableView.reloadData()
+    }
+    
+    func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
+        NSLog("There was an error loading the file: %@", error)
     }
     
     /*

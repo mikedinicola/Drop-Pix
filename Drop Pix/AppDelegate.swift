@@ -50,15 +50,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         if DBSession.sharedSession().handleOpenURL(url) {
             if DBSession.sharedSession().isLinked() == true {
-                NSLog("App linked successfully!");
+                NSLog("App linked successfully!")
                 // At this point you can start making API calls
                 
                 NSNotificationCenter.defaultCenter().postNotificationName("DBLinkedSuccessfullyNotification", object: nil)                
             }
-            return true;
+            return true
         }
         // Add whatever other url handling code your app requires here
-        return false;
+        return false
     }
 }
 
