@@ -20,6 +20,8 @@
 		953AFD601C8AA7EE0006BF9A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */; };
 		953AFD621C8AA81E0006BF9A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD611C8AA81E0006BF9A /* Security.framework */; };
 		953AFD641C8AA8240006BF9A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD631C8AA8240006BF9A /* QuartzCore.framework */; };
+		956A0C3F1C8B3A4A008742AC /* ImageForSharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956A0C3E1C8B3A4A008742AC /* ImageForSharingView.swift */; };
+		956A0C421C8B3A5E008742AC /* ImageForSharingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956A0C411C8B3A5E008742AC /* ImageForSharingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		953AFD611C8AA81E0006BF9A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		953AFD631C8AA8240006BF9A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		953AFD651C8AAB870006BF9A /* Drop-Pix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Drop-Pix-Bridging-Header.h"; path = "Drop Pix/Drop-Pix-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		956A0C3E1C8B3A4A008742AC /* ImageForSharingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageForSharingView.swift; sourceTree = "<group>"; };
+		956A0C411C8B3A5E008742AC /* ImageForSharingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageForSharingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,10 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				953AFD281C8AA2B10006BF9A /* AppDelegate.swift */,
-				953AFD2A1C8AA2B10006BF9A /* LoginViewController.swift */,
-				953AFD581C8AA7050006BF9A /* TabBarController.swift */,
-				953AFD561C8AA6F30006BF9A /* PhotosTableViewController.swift */,
-				953AFD5A1C8AA71C0006BF9A /* SettingsViewController.swift */,
+				956A0C401C8B3A52008742AC /* Views */,
+				956A0C3D1C8B39DF008742AC /* Controllers */,
 				953AFD2C1C8AA2B10006BF9A /* Main.storyboard */,
 				953AFD2F1C8AA2B10006BF9A /* Assets.xcassets */,
 				953AFD311C8AA2B10006BF9A /* LaunchScreen.storyboard */,
@@ -154,6 +156,26 @@
 				953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		956A0C3D1C8B39DF008742AC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				953AFD2A1C8AA2B10006BF9A /* LoginViewController.swift */,
+				953AFD581C8AA7050006BF9A /* TabBarController.swift */,
+				953AFD561C8AA6F30006BF9A /* PhotosTableViewController.swift */,
+				953AFD5A1C8AA71C0006BF9A /* SettingsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		956A0C401C8B3A52008742AC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				956A0C3E1C8B3A4A008742AC /* ImageForSharingView.swift */,
+				956A0C411C8B3A5E008742AC /* ImageForSharingView.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				953AFD331C8AA2B10006BF9A /* LaunchScreen.storyboard in Resources */,
+				956A0C421C8B3A5E008742AC /* ImageForSharingView.xib in Resources */,
 				953AFD301C8AA2B10006BF9A /* Assets.xcassets in Resources */,
 				953AFD2E1C8AA2B10006BF9A /* Main.storyboard in Resources */,
 			);
@@ -288,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				953AFD2B1C8AA2B10006BF9A /* LoginViewController.swift in Sources */,
+				956A0C3F1C8B3A4A008742AC /* ImageForSharingView.swift in Sources */,
 				953AFD591C8AA7050006BF9A /* TabBarController.swift in Sources */,
 				953AFD291C8AA2B10006BF9A /* AppDelegate.swift in Sources */,
 				953AFD5B1C8AA71C0006BF9A /* SettingsViewController.swift in Sources */,
