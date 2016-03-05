@@ -11,6 +11,7 @@ import UIKit
 class ImageForSharingView: UIView {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var button: UIButton!
     
     /*
     // Only override drawRect: if you perform custom drawing.

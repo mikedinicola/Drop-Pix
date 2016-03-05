@@ -14,6 +14,7 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     var myContents: [String: AnyObject]! = [:]
     var fileNames: [String]! = []
+    var imageForSharingView: ImageForSharingView?
     
     // MARK: - View Lifecycle
     
@@ -109,6 +110,28 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let fileName = fileNames[indexPath.row]
+        let dict = myContents[fileName] as! [String: AnyObject]
+        
+        if dict["thumb"] != nil {
+            
+            imageForSharingView = NSBundle.mainBundle().loadNibNamed("ImageForSharingView", owner: self, options: nil).first as? ImageForSharingView
+            imageForSharingView?.frame = view.bounds
+            
+            imageForSharingView?.button.addTarget(self, action: "imageForSharingViewButtonTouchUpInside", forControlEvents: .TouchUpInside)
+            
+            imageForSharingView?.imageView.image = dict["thumb"] as? UIImage
+            
+            tableView.scrollEnabled = false
+            
+            super.view.addSubview(imageForSharingView!)
+        }
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -148,6 +171,10 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     func loadDBMetadata() {
         restClient.loadMetadata("/Drop-Pix")
+    }
+    
+    func imageForSharingViewButtonTouchUpInside() {
+        imageForSharingView?.removeFromSuperview()
     }
     
     // MARK: - DBRestClientDelegate

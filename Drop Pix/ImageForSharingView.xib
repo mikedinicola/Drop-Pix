@@ -14,15 +14,23 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Im7-p2-Wvj">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td8-pV-AgU">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Im7-p2-Wvj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G2s-JK-EEK"/>
+                <constraint firstItem="Td8-pV-AgU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Gbs-Wv-Emq"/>
+                <constraint firstAttribute="trailing" secondItem="Td8-pV-AgU" secondAttribute="trailing" id="UbG-Vr-UT4"/>
                 <constraint firstAttribute="bottom" secondItem="Im7-p2-Wvj" secondAttribute="bottom" id="Zp8-Nx-fEl"/>
+                <constraint firstItem="Td8-pV-AgU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="j2Z-JU-1E7"/>
                 <constraint firstAttribute="trailing" secondItem="Im7-p2-Wvj" secondAttribute="trailing" id="kij-wB-Xlp"/>
                 <constraint firstItem="Im7-p2-Wvj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qjN-Uh-ed3"/>
+                <constraint firstAttribute="bottom" secondItem="Td8-pV-AgU" secondAttribute="bottom" id="ycR-gz-xbs"/>
             </constraints>
             <connections>
+                <outlet property="button" destination="Td8-pV-AgU" id="ARW-jh-7n8"/>
                 <outlet property="imageView" destination="Im7-p2-Wvj" id="59p-NB-OMf"/>
             </connections>
         </view>
