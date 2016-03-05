@@ -110,34 +110,6 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         return cell
     }
     
-    func animateImageForSharingViewTimerCallback(timer: NSTimer) {
-        tableView.userInteractionEnabled = true
-        
-        let userInfo = timer.userInfo as! [String: AnyObject]
-        let dict = userInfo["dict"] as! [String: AnyObject]
-        animateImageForSharingView(dict)
-    }
-    
-    func animateImageForSharingView(dict: [String: AnyObject]) {
-        imageForSharingView = NSBundle.mainBundle().loadNibNamed("ImageForSharingView", owner: self, options: nil).first as? ImageForSharingView
-        var imageForSharingViewFrame =  view.bounds
-        imageForSharingViewFrame.origin.y = view.bounds.size.height
-        imageForSharingView?.frame = imageForSharingViewFrame
-        
-        imageForSharingView?.button.addTarget(self, action: "imageForSharingViewButtonTouchUpInside", forControlEvents: .TouchUpInside)
-        
-        imageForSharingView?.imageView.image = dict["thumb"] as? UIImage
-        
-        tableView.scrollEnabled = false
-        
-        super.view.addSubview(imageForSharingView!)
-        
-        UIView.animateWithDuration(0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .TransitionNone, animations: { () -> Void in
-            self.imageForSharingView?.frame = self.view.bounds
-            }, completion: nil)
-
-    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let fileName = fileNames[indexPath.row]
@@ -150,7 +122,6 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
                 let timer = NSTimer(timeInterval: 0.5, target: self, selector: "animateImageForSharingViewTimerCallback:", userInfo: ["dict": dict], repeats: false)
                 NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
                 
-                tableView.userInteractionEnabled = false
             } else {
                 
                 animateImageForSharingView(dict)
@@ -211,7 +182,50 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
                 
                 self.imageForSharingView?.removeFromSuperview()
                 self.imageForSharingView = nil
+                
+                self.tableView.scrollEnabled = true
         }
+    }
+    
+    func animateImageForSharingViewTimerCallback(timer: NSTimer) {
+        
+        let userInfo = timer.userInfo as! [String: AnyObject]
+        let dict = userInfo["dict"] as! [String: AnyObject]
+        animateImageForSharingView(dict)
+    }
+    
+    func animateImageForSharingView(dict: [String: AnyObject]) {
+        
+        tableView.userInteractionEnabled = true
+        
+        if imageForSharingView != nil {
+            imageForSharingView?.removeFromSuperview()
+            imageForSharingView = nil
+        }
+        
+        imageForSharingView = NSBundle.mainBundle().loadNibNamed("ImageForSharingView", owner: self, options: nil).first as? ImageForSharingView
+        var imageForSharingViewFrame =  view.bounds
+        imageForSharingViewFrame.origin.y = view.bounds.size.height
+        imageForSharingView?.frame = imageForSharingViewFrame
+        
+        imageForSharingView?.button.addTarget(self, action: "imageForSharingViewButtonTouchUpInside", forControlEvents: .TouchUpInside)
+        
+        if dict["image"] != nil {
+            imageForSharingView?.imageView.image = dict["image"] as? UIImage
+        } else {
+            imageForSharingView?.imageView.image = dict["thumb"] as? UIImage
+        }
+        
+        imageForSharingView?.imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        
+        tableView.scrollEnabled = false
+        
+        super.view.addSubview(imageForSharingView!)
+        
+        UIView.animateWithDuration(0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .TransitionNone, animations: { () -> Void in
+            self.imageForSharingView?.frame = self.view.bounds
+            }, completion: nil)
+        
     }
     
     // MARK: - DBRestClientDelegate
