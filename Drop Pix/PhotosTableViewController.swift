@@ -68,8 +68,9 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         cell.textLabel?.text = file.filename
         */
 
-        if let image = dict["image"] as? UIImage {
+        if let image = dict["thumb"] as? UIImage {
             cell.imageView?.image = image
+            cell.imageView?.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
         } else {
             cell.imageView?.image = nil
         }
@@ -141,6 +142,9 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
                     let localPath = localDir.stringByAppendingString(file.filename)
                     
                     restClient.loadFile(file.path, intoPath: localPath)
+                    
+                    let thumbPath = localPath.stringByAppendingString("_THUMB")
+                    restClient.loadThumbnail(file.path, ofSize: "xs", intoPath: thumbPath)
                 }
             }
             if metadata.contents.count > 1 {
@@ -167,12 +171,27 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         dict["image"] = image
         
         myContents[metadata.filename] = dict
-        
-        tableView.reloadData()
     }
     
     func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
         NSLog("There was an error loading the file: %@", error)
+    }
+    
+    func restClient(client: DBRestClient!, loadedThumbnail destPath: String!, metadata: DBMetadata!) {
+        NSLog("Thumbnail loaded into path: %@", destPath)
+        
+        let image = UIImage(contentsOfFile: destPath)
+        
+        var dict = myContents[metadata.filename] as! [String: AnyObject]
+        dict["thumb"] = image
+        
+        myContents[metadata.filename] = dict
+        
+        tableView.reloadData()
+    }
+    
+    func restClient(client: DBRestClient!, loadThumbnailFailedWithError error: NSError!) {
+        NSLog("There was an error loading the thumbnail: %@", error)
     }
     
     /*
