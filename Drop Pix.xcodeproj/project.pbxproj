@@ -1,0 +1,507 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		953AFD291C8AA2B10006BF9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD281C8AA2B10006BF9A /* AppDelegate.swift */; };
+		953AFD2B1C8AA2B10006BF9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD2A1C8AA2B10006BF9A /* ViewController.swift */; };
+		953AFD2E1C8AA2B10006BF9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953AFD2C1C8AA2B10006BF9A /* Main.storyboard */; };
+		953AFD301C8AA2B10006BF9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953AFD2F1C8AA2B10006BF9A /* Assets.xcassets */; };
+		953AFD331C8AA2B10006BF9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953AFD311C8AA2B10006BF9A /* LaunchScreen.storyboard */; };
+		953AFD3E1C8AA2B10006BF9A /* Drop_PixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD3D1C8AA2B10006BF9A /* Drop_PixTests.swift */; };
+		953AFD491C8AA2B10006BF9A /* Drop_PixUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD481C8AA2B10006BF9A /* Drop_PixUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		953AFD3A1C8AA2B10006BF9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953AFD1D1C8AA2B10006BF9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953AFD241C8AA2B10006BF9A;
+			remoteInfo = "Drop Pix";
+		};
+		953AFD451C8AA2B10006BF9A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953AFD1D1C8AA2B10006BF9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953AFD241C8AA2B10006BF9A;
+			remoteInfo = "Drop Pix";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		953AFD251C8AA2B10006BF9A /* Drop Pix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drop Pix.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		953AFD281C8AA2B10006BF9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		953AFD2A1C8AA2B10006BF9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		953AFD2D1C8AA2B10006BF9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		953AFD2F1C8AA2B10006BF9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		953AFD321C8AA2B10006BF9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		953AFD341C8AA2B10006BF9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953AFD391C8AA2B10006BF9A /* Drop PixTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Drop PixTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		953AFD3D1C8AA2B10006BF9A /* Drop_PixTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drop_PixTests.swift; sourceTree = "<group>"; };
+		953AFD3F1C8AA2B10006BF9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953AFD441C8AA2B10006BF9A /* Drop PixUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Drop PixUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		953AFD481C8AA2B10006BF9A /* Drop_PixUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drop_PixUITests.swift; sourceTree = "<group>"; };
+		953AFD4A1C8AA2B10006BF9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		953AFD221C8AA2B10006BF9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953AFD361C8AA2B10006BF9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953AFD411C8AA2B10006BF9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		953AFD1C1C8AA2B10006BF9A = {
+			isa = PBXGroup;
+			children = (
+				953AFD271C8AA2B10006BF9A /* Drop Pix */,
+				953AFD3C1C8AA2B10006BF9A /* Drop PixTests */,
+				953AFD471C8AA2B10006BF9A /* Drop PixUITests */,
+				953AFD261C8AA2B10006BF9A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		953AFD261C8AA2B10006BF9A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				953AFD251C8AA2B10006BF9A /* Drop Pix.app */,
+				953AFD391C8AA2B10006BF9A /* Drop PixTests.xctest */,
+				953AFD441C8AA2B10006BF9A /* Drop PixUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		953AFD271C8AA2B10006BF9A /* Drop Pix */ = {
+			isa = PBXGroup;
+			children = (
+				953AFD281C8AA2B10006BF9A /* AppDelegate.swift */,
+				953AFD2A1C8AA2B10006BF9A /* ViewController.swift */,
+				953AFD2C1C8AA2B10006BF9A /* Main.storyboard */,
+				953AFD2F1C8AA2B10006BF9A /* Assets.xcassets */,
+				953AFD311C8AA2B10006BF9A /* LaunchScreen.storyboard */,
+				953AFD341C8AA2B10006BF9A /* Info.plist */,
+			);
+			path = "Drop Pix";
+			sourceTree = "<group>";
+		};
+		953AFD3C1C8AA2B10006BF9A /* Drop PixTests */ = {
+			isa = PBXGroup;
+			children = (
+				953AFD3D1C8AA2B10006BF9A /* Drop_PixTests.swift */,
+				953AFD3F1C8AA2B10006BF9A /* Info.plist */,
+			);
+			path = "Drop PixTests";
+			sourceTree = "<group>";
+		};
+		953AFD471C8AA2B10006BF9A /* Drop PixUITests */ = {
+			isa = PBXGroup;
+			children = (
+				953AFD481C8AA2B10006BF9A /* Drop_PixUITests.swift */,
+				953AFD4A1C8AA2B10006BF9A /* Info.plist */,
+			);
+			path = "Drop PixUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		953AFD241C8AA2B10006BF9A /* Drop Pix */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953AFD4D1C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop Pix" */;
+			buildPhases = (
+				953AFD211C8AA2B10006BF9A /* Sources */,
+				953AFD221C8AA2B10006BF9A /* Frameworks */,
+				953AFD231C8AA2B10006BF9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Drop Pix";
+			productName = "Drop Pix";
+			productReference = 953AFD251C8AA2B10006BF9A /* Drop Pix.app */;
+			productType = "com.apple.product-type.application";
+		};
+		953AFD381C8AA2B10006BF9A /* Drop PixTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953AFD501C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop PixTests" */;
+			buildPhases = (
+				953AFD351C8AA2B10006BF9A /* Sources */,
+				953AFD361C8AA2B10006BF9A /* Frameworks */,
+				953AFD371C8AA2B10006BF9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				953AFD3B1C8AA2B10006BF9A /* PBXTargetDependency */,
+			);
+			name = "Drop PixTests";
+			productName = "Drop PixTests";
+			productReference = 953AFD391C8AA2B10006BF9A /* Drop PixTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		953AFD431C8AA2B10006BF9A /* Drop PixUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953AFD531C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop PixUITests" */;
+			buildPhases = (
+				953AFD401C8AA2B10006BF9A /* Sources */,
+				953AFD411C8AA2B10006BF9A /* Frameworks */,
+				953AFD421C8AA2B10006BF9A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				953AFD461C8AA2B10006BF9A /* PBXTargetDependency */,
+			);
+			name = "Drop PixUITests";
+			productName = "Drop PixUITests";
+			productReference = 953AFD441C8AA2B10006BF9A /* Drop PixUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		953AFD1D1C8AA2B10006BF9A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Mike DiNicola";
+				TargetAttributes = {
+					953AFD241C8AA2B10006BF9A = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					953AFD381C8AA2B10006BF9A = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 953AFD241C8AA2B10006BF9A;
+					};
+					953AFD431C8AA2B10006BF9A = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 953AFD241C8AA2B10006BF9A;
+					};
+				};
+			};
+			buildConfigurationList = 953AFD201C8AA2B10006BF9A /* Build configuration list for PBXProject "Drop Pix" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 953AFD1C1C8AA2B10006BF9A;
+			productRefGroup = 953AFD261C8AA2B10006BF9A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				953AFD241C8AA2B10006BF9A /* Drop Pix */,
+				953AFD381C8AA2B10006BF9A /* Drop PixTests */,
+				953AFD431C8AA2B10006BF9A /* Drop PixUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		953AFD231C8AA2B10006BF9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953AFD331C8AA2B10006BF9A /* LaunchScreen.storyboard in Resources */,
+				953AFD301C8AA2B10006BF9A /* Assets.xcassets in Resources */,
+				953AFD2E1C8AA2B10006BF9A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953AFD371C8AA2B10006BF9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953AFD421C8AA2B10006BF9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		953AFD211C8AA2B10006BF9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953AFD2B1C8AA2B10006BF9A /* ViewController.swift in Sources */,
+				953AFD291C8AA2B10006BF9A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953AFD351C8AA2B10006BF9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953AFD3E1C8AA2B10006BF9A /* Drop_PixTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953AFD401C8AA2B10006BF9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953AFD491C8AA2B10006BF9A /* Drop_PixUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		953AFD3B1C8AA2B10006BF9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953AFD241C8AA2B10006BF9A /* Drop Pix */;
+			targetProxy = 953AFD3A1C8AA2B10006BF9A /* PBXContainerItemProxy */;
+		};
+		953AFD461C8AA2B10006BF9A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953AFD241C8AA2B10006BF9A /* Drop Pix */;
+			targetProxy = 953AFD451C8AA2B10006BF9A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		953AFD2C1C8AA2B10006BF9A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				953AFD2D1C8AA2B10006BF9A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		953AFD311C8AA2B10006BF9A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				953AFD321C8AA2B10006BF9A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		953AFD4B1C8AA2B10006BF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		953AFD4C1C8AA2B10006BF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		953AFD4E1C8AA2B10006BF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Drop Pix/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-Pix";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		953AFD4F1C8AA2B10006BF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Drop Pix/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-Pix";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		953AFD511C8AA2B10006BF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Drop PixTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-PixTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Drop Pix.app/Drop Pix";
+			};
+			name = Debug;
+		};
+		953AFD521C8AA2B10006BF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "Drop PixTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-PixTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Drop Pix.app/Drop Pix";
+			};
+			name = Release;
+		};
+		953AFD541C8AA2B10006BF9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Drop PixUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-PixUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Drop Pix";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		953AFD551C8AA2B10006BF9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Drop PixUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mike-DiNicola.Drop-PixUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "Drop Pix";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		953AFD201C8AA2B10006BF9A /* Build configuration list for PBXProject "Drop Pix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953AFD4B1C8AA2B10006BF9A /* Debug */,
+				953AFD4C1C8AA2B10006BF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		953AFD4D1C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop Pix" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953AFD4E1C8AA2B10006BF9A /* Debug */,
+				953AFD4F1C8AA2B10006BF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		953AFD501C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop PixTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953AFD511C8AA2B10006BF9A /* Debug */,
+				953AFD521C8AA2B10006BF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		953AFD531C8AA2B10006BF9A /* Build configuration list for PBXNativeTarget "Drop PixUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953AFD541C8AA2B10006BF9A /* Debug */,
+				953AFD551C8AA2B10006BF9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 953AFD1D1C8AA2B10006BF9A /* Project object */;
+}
