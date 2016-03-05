@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    // MARK: View Lifecycle
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,8 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Custom Methods
+    
     @IBAction func signInButtonTouchUpInside(sender: AnyObject) {
         
         if DBSession.sharedSession().isLinked() == false {
@@ -39,7 +41,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     
     func segueToNavController() {
         performSegueWithIdentifier("LoginVCToNavControllerModalSegue", sender: nil)

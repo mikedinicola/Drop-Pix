@@ -74,7 +74,7 @@
                                 <state key="normal" title="Logout"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pOs-bc-68Y" firstAttribute="centerX" secondItem="o6X-6J-JEx" secondAttribute="centerX" id="JQj-Gc-Mgh"/>
                             <constraint firstItem="pOs-bc-68Y" firstAttribute="centerY" secondItem="o6X-6J-JEx" secondAttribute="centerY" id="Wy3-zQ-nib"/>
