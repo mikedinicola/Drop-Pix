@@ -37,7 +37,8 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
                     
                     let pointAnnotation = MKPointAnnotation()
                     pointAnnotation.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
-                    pointAnnotation.title = name.componentsSeparatedByString(", ").first
+//                    pointAnnotation.title = name.componentsSeparatedByString(", ").first
+                    pointAnnotation.title = name
                     
                     mapView.addAnnotation(pointAnnotation)
                 }
@@ -48,6 +49,35 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - MKMapViewDelegate
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("annotationView")
+        
+        if annotationView == nil {
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "annotationView")
+        }
+        
+        annotationView?.frame = CGRectMake(0, 0, 44, 44)
+        
+        let dict = _tabBarController.myContents[annotation.title!!]!
+        
+        if let image = dict["thumb"] as? UIImage {
+            let imageView = UIImageView(frame: annotationView!.frame)
+            
+            imageView.layer.cornerRadius = 5
+            imageView.clipsToBounds = true
+            
+            imageView.image = image
+            imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+            
+            annotationView?.addSubview(imageView)
+        }
+        
+        return annotationView
     }
 
     /*
