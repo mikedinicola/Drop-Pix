@@ -10,11 +10,7 @@ import UIKit
 
 class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
-    var restClient: DBRestClient!
-    
-    var myContents: [String: AnyObject]! = [:]
-    var fileNames: [String]! = []
-    var imageForSharingView: ImageForSharingView?
+    var _tabBarController: TabBarController!
     
     // MARK: - View Lifecycle
     
@@ -27,12 +23,14 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        restClient = DBRestClient(session: DBSession.sharedSession())
-        restClient.delegate = self
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "tableViewReloadData", name: "DBTableViewReloadDataNotification", object: nil)
         
-        loadDBMetadata()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadDBMetadata", name: "DBLFileUploadedSuccessfullyNotification", object: nil)
+        _tabBarController = tabBarController as! TabBarController
     }    
+    
+    func tableViewReloadData() {
+        tableView.reloadData()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -48,10 +46,10 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if myContents == nil {
+        if _tabBarController.myContents == nil {
             return 0
         } else {
-            return myContents.count
+            return _tabBarController.myContents.count
         }
     }
     
@@ -80,14 +78,14 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         
         // Configure the cell...
         
-        let fileName = fileNames[indexPath.row]
-        let dict = myContents[fileName] as! [String: AnyObject]
+        let fileName = _tabBarController.fileNames[indexPath.row]
+        let dict = _tabBarController.myContents[fileName] as! [String: AnyObject]
         let file = dict["file"] as! DBMetadata
         
         let localDir = NSTemporaryDirectory()
         let localPath = localDir.stringByAppendingString(file.filename)
         
-        restClient.loadFile(file.path, intoPath: localPath)
+         _tabBarController.restClient.loadFile(file.path, intoPath: localPath)
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
@@ -112,19 +110,18 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let fileName = fileNames[indexPath.row]
-        let dict = myContents[fileName] as! [String: AnyObject]
+        let fileName = _tabBarController.fileNames[indexPath.row]
+        let dict = _tabBarController.myContents[fileName] as! [String: AnyObject]
         
         if dict["thumb"] != nil {
-            
-            if imageForSharingView != nil {
+            if _tabBarController.imageForSharingView != nil {
                 
                 let timer = NSTimer(timeInterval: 0.5, target: self, selector: "animateImageForSharingViewTimerCallback:", userInfo: ["dict": dict], repeats: false)
                 NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
                 
             } else {
                 
-                animateImageForSharingView(dict)
+                _tabBarController.animateImageForSharingView(dict)
             }
         }
         
@@ -168,132 +165,8 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
     
     // MARK: - Custom Methods
     
-    func loadDBMetadata() {
-        restClient.loadMetadata("/Drop-Pix")
-    }
-    
-    func imageForSharingViewButtonTouchUpInside() {
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .TransitionNone, animations: { () -> Void in
-            
-            var imageForSharingViewFrame =  self.view.bounds
-            imageForSharingViewFrame.origin.y = self.view.bounds.size.height
-            self.imageForSharingView?.frame = imageForSharingViewFrame
-            }) { (completed) -> Void in
-                
-                self.imageForSharingView?.removeFromSuperview()
-                self.imageForSharingView = nil
-                
-                self.tableView.scrollEnabled = true
-        }
-    }
-    
     func animateImageForSharingViewTimerCallback(timer: NSTimer) {
-        
-        let userInfo = timer.userInfo as! [String: AnyObject]
-        let dict = userInfo["dict"] as! [String: AnyObject]
-        animateImageForSharingView(dict)
-    }
-    
-    func animateImageForSharingView(dict: [String: AnyObject]) {
-        
-        tableView.userInteractionEnabled = true
-        
-        if imageForSharingView != nil {
-            imageForSharingView?.removeFromSuperview()
-            imageForSharingView = nil
-        }
-        
-        imageForSharingView = NSBundle.mainBundle().loadNibNamed("ImageForSharingView", owner: self, options: nil).first as? ImageForSharingView
-        var imageForSharingViewFrame =  view.bounds
-        imageForSharingViewFrame.origin.y = view.bounds.size.height
-        imageForSharingView?.frame = imageForSharingViewFrame
-        
-        imageForSharingView?.button.addTarget(self, action: "imageForSharingViewButtonTouchUpInside", forControlEvents: .TouchUpInside)
-        
-        if dict["image"] != nil {
-            imageForSharingView?.imageView.image = dict["image"] as? UIImage
-        } else {
-            imageForSharingView?.imageView.image = dict["thumb"] as? UIImage
-        }
-        
-        imageForSharingView?.imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
-        
-        tableView.scrollEnabled = false
-        
-        super.view.addSubview(imageForSharingView!)
-        
-        UIView.animateWithDuration(0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .TransitionNone, animations: { () -> Void in
-            self.imageForSharingView?.frame = self.view.bounds
-            }, completion: nil)
-        
-    }
-    
-    // MARK: - DBRestClientDelegate
-    
-    func restClient(client: DBRestClient!, loadedMetadata metadata: DBMetadata!) {
-        if metadata.isDirectory == true && metadata.contents.count > 0 {
-            NSLog("Folder '%@' contains:", metadata.path)
-            
-            for fileObject in metadata.contents {
-                let file = fileObject as! DBMetadata
-                NSLog("\t%@", file.filename)
-                
-                if myContents[file.filename] == nil {
-                    myContents[file.filename] = ["file": file]
-                    fileNames.append(file.filename)
-                    
-                    let localDir = NSTemporaryDirectory()
-                    let localPath = localDir.stringByAppendingString(file.filename)
-                    
-                    let thumbPath = localPath.stringByAppendingString("_THUMB")
-                    restClient.loadThumbnail(file.path, ofSize: "xs", intoPath: thumbPath)
-                }
-            }
-            if metadata.contents.count > 1 {
-                parentViewController?.navigationItem.title = String(format: "%ld Photos", metadata.contents.count)
-            } else {
-                parentViewController?.navigationItem.title = String(format: "%ld Photo", metadata.contents.count)
-            }
-            tableView.reloadData()
-        } else {
-            parentViewController?.navigationItem.title = "No Photos"
-        }
-    }
-    
-    func restClient(client: DBRestClient!, loadMetadataFailedWithError error: NSError!) {
-        NSLog("Error loading metadata: %@", error)
-    }
-    
-    func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
-        NSLog("File loaded into path: %@", destPath)
-        
-        let image = UIImage(contentsOfFile: destPath)
-        
-        var dict = myContents[metadata.filename] as! [String: AnyObject]
-        dict["image"] = image
-        
-        myContents[metadata.filename] = dict
-    }
-    
-    func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
-        NSLog("There was an error loading the file: %@", error)
-    }
-    
-    func restClient(client: DBRestClient!, loadedThumbnail destPath: String!, metadata: DBMetadata!) {
-        NSLog("Thumbnail loaded into path: %@", destPath)
-        
-        let image = UIImage(contentsOfFile: destPath)
-        
-        var dict = myContents[metadata.filename] as! [String: AnyObject]
-        dict["thumb"] = image
-        
-        myContents[metadata.filename] = dict
-        
-        tableView.reloadData()
-    }
-    
-    func restClient(client: DBRestClient!, loadThumbnailFailedWithError error: NSError!) {
-        NSLog("There was an error loading the thumbnail: %@", error)
+        _tabBarController.animateImageForSharingViewTimerCallback(timer)
     }
     
     /*

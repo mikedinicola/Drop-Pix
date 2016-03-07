@@ -13,6 +13,10 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     
     var restClient: DBRestClient!
     
+    var myContents: [String: AnyObject]! = [:]
+    var fileNames: [String]! = []
+    var imageForSharingView: ImageForSharingView?
+    
     var picButton: UIButton?
     
     var locationManager: CLLocationManager!
@@ -28,6 +32,8 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         restClient = DBRestClient(session: DBSession.sharedSession())
         restClient.delegate = self
+        
+        loadDBMetadata()
         
         locationManager = CLLocationManager()
         
@@ -67,6 +73,60 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     }
     
     // MARK: - Custom Methods
+    
+    func loadDBMetadata() {
+        restClient.loadMetadata("/Drop-Pix")
+    }
+    
+    func imageForSharingViewButtonTouchUpInside() {
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .TransitionNone, animations: { () -> Void in
+            
+            var imageForSharingViewFrame =  self.view.bounds
+            imageForSharingViewFrame.origin.y = self.view.bounds.size.height+128
+            self.imageForSharingView?.frame = imageForSharingViewFrame
+            }) { (completed) -> Void in
+                
+                self.imageForSharingView?.removeFromSuperview()
+                self.imageForSharingView = nil
+        }
+    }
+    
+    func animateImageForSharingViewTimerCallback(timer: NSTimer) {
+        
+        let userInfo = timer.userInfo as! [String: AnyObject]
+        let dict = userInfo["dict"] as! [String: AnyObject]
+        animateImageForSharingView(dict)
+    }
+    
+    func animateImageForSharingView(dict: [String: AnyObject]) {
+        
+        if imageForSharingView != nil {
+            imageForSharingView?.removeFromSuperview()
+            imageForSharingView = nil
+        }
+        
+        imageForSharingView = NSBundle.mainBundle().loadNibNamed("ImageForSharingView", owner: self, options: nil).first as? ImageForSharingView
+        var imageForSharingViewFrame =  view.bounds
+        imageForSharingViewFrame.origin.y = view.bounds.size.height
+        imageForSharingView?.frame = imageForSharingViewFrame
+        
+        imageForSharingView?.button.addTarget(self, action: "imageForSharingViewButtonTouchUpInside", forControlEvents: .TouchUpInside)
+        
+        if dict["image"] != nil {
+            imageForSharingView?.imageView.image = dict["image"] as? UIImage
+        } else {
+            imageForSharingView?.imageView.image = dict["thumb"] as? UIImage
+        }
+        
+        imageForSharingView?.imageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_2))
+        
+        super.view.addSubview(imageForSharingView!)
+        
+        UIView.animateWithDuration(0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .TransitionNone, animations: { () -> Void in
+            self.imageForSharingView?.frame = self.view.bounds
+            }, completion: nil)
+        
+    }
     
     func picButtonTouchUpInside() {
         let imagePickerController = UIImagePickerController()
@@ -128,11 +188,77 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     func restClient(client: DBRestClient!, uploadedFile destPath: String!, from srcPath: String!, metadata: DBMetadata!) {
         NSLog("File uploaded successfully to path: %@", metadata.path)
         
-        NSNotificationCenter.defaultCenter().postNotificationName("DBLFileUploadedSuccessfullyNotification", object: nil)
+        loadDBMetadata()
     }
     
     func restClient(client: DBRestClient!, uploadFileFailedWithError error: NSError!) {
         NSLog("File upload failed with error: %@", error)
+    }
+    
+    func restClient(client: DBRestClient!, loadedMetadata metadata: DBMetadata!) {
+        if metadata.isDirectory == true && metadata.contents.count > 0 {
+            NSLog("Folder '%@' contains:", metadata.path)
+            
+            for fileObject in metadata.contents {
+                let file = fileObject as! DBMetadata
+                NSLog("\t%@", file.filename)
+                
+                if myContents[file.filename] == nil {
+                    myContents[file.filename] = ["file": file]
+                    fileNames.append(file.filename)
+                    
+                    let localDir = NSTemporaryDirectory()
+                    let localPath = localDir.stringByAppendingString(file.filename)
+                    
+                    let thumbPath = localPath.stringByAppendingString("_THUMB")
+                    restClient.loadThumbnail(file.path, ofSize: "xs", intoPath: thumbPath)
+                }
+            }
+            if metadata.contents.count > 1 {
+                navigationItem.title = String(format: "%ld Photos", metadata.contents.count)
+            } else {
+                navigationItem.title = String(format: "%ld Photo", metadata.contents.count)
+            }
+            NSNotificationCenter.defaultCenter().postNotificationName("DBTableViewReloadDataNotification", object: nil)
+        } else {
+            navigationItem.title = "No Photos"
+        }
+    }
+    
+    func restClient(client: DBRestClient!, loadMetadataFailedWithError error: NSError!) {
+        NSLog("Error loading metadata: %@", error)
+    }
+    
+    func restClient(client: DBRestClient!, loadedFile destPath: String!, contentType: String!, metadata: DBMetadata!) {
+        NSLog("File loaded into path: %@", destPath)
+        
+        let image = UIImage(contentsOfFile: destPath)
+        
+        var dict = myContents[metadata.filename] as! [String: AnyObject]
+        dict["image"] = image
+        
+        myContents[metadata.filename] = dict
+    }
+    
+    func restClient(client: DBRestClient!, loadFileFailedWithError error: NSError!) {
+        NSLog("There was an error loading the file: %@", error)
+    }
+    
+    func restClient(client: DBRestClient!, loadedThumbnail destPath: String!, metadata: DBMetadata!) {
+        NSLog("Thumbnail loaded into path: %@", destPath)
+        
+        let image = UIImage(contentsOfFile: destPath)
+        
+        var dict = myContents[metadata.filename] as! [String: AnyObject]
+        dict["thumb"] = image
+        
+        myContents[metadata.filename] = dict
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("DBTableViewReloadDataNotification", object: nil)
+    }
+    
+    func restClient(client: DBRestClient!, loadThumbnailFailedWithError error: NSError!) {
+        NSLog("There was an error loading the thumbnail: %@", error)
     }
     
     /*
