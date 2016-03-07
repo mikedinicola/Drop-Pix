@@ -15,7 +15,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     
     var picButton: UIButton?
     
-    var locationManager: CLLocationManager?
+    var locationManager: CLLocationManager!
     
     let tabBarHeight: CGFloat = 49
     
@@ -33,12 +33,12 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             
-            locationManager!.delegate = self
+            locationManager.delegate = self
             
-            locationManager!.requestWhenInUseAuthorization()
+            locationManager.requestWhenInUseAuthorization()
         } else if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
             
-            locationManager!.delegate = self
+            locationManager.delegate = self
         }
     }
     
@@ -76,6 +76,17 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         presentViewController(imagePickerController, animated: true, completion: nil)
     }
     
+    func uploadImageToDropbox(image: UIImage!, filename: String? = "TITLE.PNG") {
+        let localDir = NSTemporaryDirectory()
+        let localPath = localDir.stringByAppendingString(filename!)
+        
+        let imageData = NSData(data: UIImagePNGRepresentation(image)!)
+        imageData.writeToFile(localPath, atomically: true)
+        
+        let destDir = "/Drop-Pix"
+        restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)
+    }
+    
     // MARK: - UIImagePickerControllerDelegate
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
@@ -83,15 +94,17 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         // Upload photo to Dropbox
         
-        let filename = "TITLE.PNG"
-        let localDir = NSTemporaryDirectory()
-        let localPath = localDir.stringByAppendingString(filename)
-        
-        let imageData = NSData(data: UIImagePNGRepresentation(image)!)
-        imageData.writeToFile(localPath, atomically: true)
-        
-        let destDir = "/Drop-Pix"
-        restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)
+        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(locationManager.location!, completionHandler: { (placemarkArray, error) -> Void in
+                guard let locality = placemarkArray?.first?.locality else {return}
+                
+                self.uploadImageToDropbox(image, filename: locality.stringByAppendingString(".PNG"))
+            })
+        } else {
+            uploadImageToDropbox(image)
+        }
     }
     
     // MARK: - CLLocationManagerDelegate
