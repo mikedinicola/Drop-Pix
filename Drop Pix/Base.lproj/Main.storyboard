@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftI-jr-bkf">
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftI-jr-bkf">
                                 <rect key="frame" x="216" y="438" width="168" height="34"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -57,6 +57,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="signInButton" destination="ftI-jr-bkf" id="2yk-DD-5gJ"/>
                         <segue destination="NLC-o1-WhR" kind="presentation" identifier="LoginVCToNavControllerModalSegue" modalTransitionStyle="crossDissolve" id="mlT-4K-Nln"/>
                     </connections>
                 </viewController>

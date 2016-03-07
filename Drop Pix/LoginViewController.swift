@@ -10,6 +10,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var signInButton: UIButton!
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -24,6 +26,10 @@ class LoginViewController: UIViewController {
         
         if DBSession.sharedSession().isLinked() == true {
             segueToNavController()
+        } else {
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                self.signInButton.alpha = 1.0
+            })
         }
     }
 
@@ -49,6 +55,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func unwindToLoginVC (segue : UIStoryboardSegue) {
         NSLog("%@", segue.identifier!)
+        
+        self.signInButton.alpha = 1.0
     }
 }
 
