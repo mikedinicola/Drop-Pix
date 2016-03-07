@@ -134,7 +134,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
             navigationItem.title = dateFormatter.stringFromDate(file.lastModifiedDate)
         } else {
             
-            navigationItem.title = file.filename.stringByReplacingOccurrencesOfString(".PNG", withString: "")
+            navigationItem.title = file.filename.componentsSeparatedByString(", ").first
         }
         
         if dict["image"] != nil {
@@ -188,9 +188,13 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
 
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(locationManager.location!, completionHandler: { (placemarkArray, error) -> Void in
-                guard let locality = placemarkArray?.first?.locality else {return}
+                guard let locality = placemarkArray?.first?.locality else {return}                
                 
-                self.uploadImageToDropbox(image, filename: locality.stringByAppendingString(".PNG"))
+                let coordinate = self.locationManager.location!.coordinate
+                
+                let titleString = String(format: "%@, %f, %f.PNG", locality, coordinate.latitude, coordinate.longitude)
+                
+                self.uploadImageToDropbox(image, filename: titleString)
             })
         } else {
             uploadImageToDropbox(image)
@@ -281,6 +285,17 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         var dict = myContents[metadata.filename] as! [String: AnyObject]
         dict["thumb"] = image
+        
+        let titleComponents = metadata.filename.componentsSeparatedByString(", ")
+        
+        if titleComponents.count > 1 {
+            
+            let latitude = titleComponents[1]
+            let longitude = titleComponents[2].stringByReplacingOccurrencesOfString(".PNG", withString: "")
+            
+            dict["latitude"] = (latitude as NSString).doubleValue
+            dict["longitude"] = (longitude as NSString).doubleValue
+        }        
         
         myContents[metadata.filename] = dict
         

@@ -94,7 +94,8 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
             cell.textLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
             cell.detailTextLabel?.text = ""
         } else {
-            cell.textLabel?.text = file.filename.stringByReplacingOccurrencesOfString(".PNG", withString: "")
+            
+            cell.textLabel?.text = file.filename.componentsSeparatedByString(", ").first
             cell.detailTextLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
         }
 

@@ -11,6 +11,8 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate  {
 
+    var _tabBarController: TabBarController!
+    
     @IBOutlet weak var mapView: MKMapView!
     
     // MARK: - View Lifecycle
@@ -19,16 +21,34 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        _tabBarController = tabBarController as! TabBarController
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if _tabBarController.myContents != nil {
+            for name in _tabBarController.fileNames {
+                let dict = _tabBarController.myContents[name]!
+                
+                if let latitude = dict["latitude"] as? CLLocationDegrees {
+                    let longitude = dict["longitude"] as! CLLocationDegrees
+                    
+                    let pointAnnotation = MKPointAnnotation()
+                    pointAnnotation.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+                    pointAnnotation.title = name.componentsSeparatedByString(", ").first
+                    
+                    mapView.addAnnotation(pointAnnotation)
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - Custom Methods
-    
-
 
     /*
     // MARK: - Navigation
