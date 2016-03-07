@@ -79,6 +79,23 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
         
         return annotationView
     }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        
+            let dict = _tabBarController.myContents[view.annotation!.title!!] as! [String: AnyObject]
+            
+            if dict["thumb"] != nil {
+                if _tabBarController.imageForSharingView != nil {
+                    
+                    let timer = NSTimer(timeInterval: 0.5, target: self, selector: "animateImageForSharingViewTimerCallback:", userInfo: ["dict": dict], repeats: false)
+                    NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+                    
+                } else {
+                    
+                    _tabBarController.animateImageForSharingView(dict)
+                }
+            }            
+    }
 
     /*
     // MARK: - Navigation
