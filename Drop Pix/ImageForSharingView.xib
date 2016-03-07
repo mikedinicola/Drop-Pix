@@ -20,9 +20,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77z-lL-MMV">
                     <rect key="frame" x="0.0" y="536" width="600" height="64"/>
                     <subviews>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWV-gr-x0o">
-                            <rect key="frame" x="20" y="0.0" width="30" height="64"/>
-                            <state key="normal" title="Edit"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWV-gr-x0o">
+                            <rect key="frame" x="20" y="0.0" width="35" height="64"/>
+                            <state key="normal" title="Filter"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzY-wU-7EA">
                             <rect key="frame" x="540" y="0.0" width="40" height="64"/>
