@@ -79,6 +79,18 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     }
     
     func imageForSharingViewButtonTouchUpInside() {
+        
+        if myContents.count > 0 {
+            if myContents.count > 1 {
+                navigationItem.title = String(format: "%ld Photos", myContents.count)
+            } else {
+                navigationItem.title = String(format: "%ld Photo", myContents.count)
+            }
+            NSNotificationCenter.defaultCenter().postNotificationName("DBTableViewReloadDataNotification", object: nil)
+        } else {
+            navigationItem.title = "No Photos"
+        }
+        
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: .TransitionNone, animations: { () -> Void in
             
             var imageForSharingViewFrame =  self.view.bounds
@@ -111,6 +123,19 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         imageForSharingView?.frame = imageForSharingViewFrame
         
         imageForSharingView?.button.addTarget(self, action: "imageForSharingViewButtonTouchUpInside", forControlEvents: .TouchUpInside)
+        
+        let file = dict["file"] as! DBMetadata
+        
+        if file.filename.containsString("TITLE") {
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+            
+            navigationItem.title = dateFormatter.stringFromDate(file.lastModifiedDate)
+        } else {
+            
+            navigationItem.title = file.filename.stringByReplacingOccurrencesOfString(".PNG", withString: "")
+        }
         
         if dict["image"] != nil {
             imageForSharingView?.imageView.image = dict["image"] as? UIImage
@@ -145,6 +170,11 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         let destDir = "/Drop-Pix"
         restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)
+    }
+    
+    @IBAction func logoutBarButtonItemAction(sender: AnyObject) {
+        DBSession.sharedSession().unlinkAll()
+        performSegueWithIdentifier("SettingsVCToLoginVCUnwindSegue", sender: nil)
     }
     
     // MARK: - UIImagePickerControllerDelegate

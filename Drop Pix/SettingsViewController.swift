@@ -31,10 +31,7 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Custom Methods
     
-    @IBAction func logoutButtonTouchUpInside(sender: AnyObject) {
-        DBSession.sharedSession().unlinkAll()
-        performSegueWithIdentifier("SettingsVCToLoginVCUnwindSegue", sender: nil)
-    }
+
 
     /*
     // MARK: - Navigation
