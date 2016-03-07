@@ -17,11 +17,11 @@
 		953AFD571C8AA6F30006BF9A /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD561C8AA6F30006BF9A /* PhotosTableViewController.swift */; };
 		953AFD591C8AA7050006BF9A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD581C8AA7050006BF9A /* TabBarController.swift */; };
 		953AFD5B1C8AA71C0006BF9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953AFD5A1C8AA71C0006BF9A /* SettingsViewController.swift */; };
-		953AFD601C8AA7EE0006BF9A /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */; };
 		953AFD621C8AA81E0006BF9A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD611C8AA81E0006BF9A /* Security.framework */; };
 		953AFD641C8AA8240006BF9A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953AFD631C8AA8240006BF9A /* QuartzCore.framework */; };
 		956A0C3F1C8B3A4A008742AC /* ImageForSharingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956A0C3E1C8B3A4A008742AC /* ImageForSharingView.swift */; };
 		956A0C421C8B3A5E008742AC /* ImageForSharingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 956A0C411C8B3A5E008742AC /* ImageForSharingView.xib */; };
+		956A0C481C8CFA19008742AC /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956A0C471C8CFA19008742AC /* DropboxSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,12 +58,12 @@
 		953AFD561C8AA6F30006BF9A /* PhotosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
 		953AFD581C8AA7050006BF9A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		953AFD5A1C8AA71C0006BF9A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "../../../Downloads/dropbox-ios-sdk-1.3.13/DropboxSDK.framework"; sourceTree = "<group>"; };
 		953AFD611C8AA81E0006BF9A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		953AFD631C8AA8240006BF9A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		953AFD651C8AAB870006BF9A /* Drop-Pix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Drop-Pix-Bridging-Header.h"; path = "Drop Pix/Drop-Pix-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		956A0C3E1C8B3A4A008742AC /* ImageForSharingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageForSharingView.swift; sourceTree = "<group>"; };
 		956A0C411C8B3A5E008742AC /* ImageForSharingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageForSharingView.xib; sourceTree = "<group>"; };
+		956A0C471C8CFA19008742AC /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				956A0C481C8CFA19008742AC /* DropboxSDK.framework in Frameworks */,
 				953AFD641C8AA8240006BF9A /* QuartzCore.framework in Frameworks */,
 				953AFD621C8AA81E0006BF9A /* Security.framework in Frameworks */,
-				953AFD601C8AA7EE0006BF9A /* DropboxSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,9 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				953AFD651C8AAB870006BF9A /* Drop-Pix-Bridging-Header.h */,
+				956A0C471C8CFA19008742AC /* DropboxSDK.framework */,
 				953AFD631C8AA8240006BF9A /* QuartzCore.framework */,
 				953AFD611C8AA81E0006BF9A /* Security.framework */,
-				953AFD5F1C8AA7EE0006BF9A /* DropboxSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

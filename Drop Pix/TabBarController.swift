@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
-class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DBRestClientDelegate {
-
+class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DBRestClientDelegate, CLLocationManagerDelegate {
+    
     var restClient: DBRestClient!
     
     var picButton: UIButton?
+    
+    var locationManager: CLLocationManager?
     
     let tabBarHeight: CGFloat = 49
     
@@ -20,11 +23,23 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         restClient = DBRestClient(session: DBSession.sharedSession())
         restClient.delegate = self
+        
+        locationManager = CLLocationManager()
+        
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            
+            locationManager!.delegate = self
+            
+            locationManager!.requestWhenInUseAuthorization()
+        } else if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+            
+            locationManager!.delegate = self
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -45,7 +60,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         tabBar.addSubview(picButton!)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,11 +89,27 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         let imageData = NSData(data: UIImagePNGRepresentation(image)!)
         imageData.writeToFile(localPath, atomically: true)
-
+        
         let destDir = "/Drop-Pix"
-        restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)        
+        restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)
     }
-
+    
+    // MARK: - CLLocationManagerDelegate
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
+        if status != .AuthorizedWhenInUse && status != .NotDetermined {
+            
+            let alertController = UIAlertController(title: "That's okay!", message: "You can enable location services anytime in your system settings.", preferredStyle: .Alert)
+            
+            let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            
+            alertController.addAction(alertAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - DBRestClientDelegate
     
     func restClient(client: DBRestClient!, uploadedFile destPath: String!, from srcPath: String!, metadata: DBMetadata!) {
@@ -93,12 +124,12 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
     
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
