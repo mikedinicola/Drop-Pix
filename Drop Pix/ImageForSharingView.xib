@@ -17,21 +17,59 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Td8-pV-AgU">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="77z-lL-MMV">
+                    <rect key="frame" x="0.0" y="536" width="600" height="64"/>
+                    <subviews>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWV-gr-x0o">
+                            <rect key="frame" x="20" y="0.0" width="30" height="64"/>
+                            <state key="normal" title="Edit"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzY-wU-7EA">
+                            <rect key="frame" x="540" y="0.0" width="40" height="64"/>
+                            <state key="normal" title="Share"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="UzY-wU-7EA" secondAttribute="bottom" id="8H9-PL-5xD"/>
+                        <constraint firstAttribute="bottom" secondItem="KWV-gr-x0o" secondAttribute="bottom" id="FoB-0G-oFn"/>
+                        <constraint firstItem="UzY-wU-7EA" firstAttribute="centerY" secondItem="77z-lL-MMV" secondAttribute="centerY" id="N16-KG-RpG"/>
+                        <constraint firstAttribute="trailing" secondItem="UzY-wU-7EA" secondAttribute="trailing" constant="20" symbolic="YES" id="ccB-kf-Frn"/>
+                        <constraint firstItem="KWV-gr-x0o" firstAttribute="leading" secondItem="77z-lL-MMV" secondAttribute="leading" constant="20" symbolic="YES" id="fSd-OR-dtC"/>
+                        <constraint firstAttribute="height" constant="64" id="hCp-mu-APw"/>
+                        <constraint firstItem="KWV-gr-x0o" firstAttribute="top" secondItem="77z-lL-MMV" secondAttribute="top" constant="7" id="iYF-Mm-q6N"/>
+                        <constraint firstItem="KWV-gr-x0o" firstAttribute="centerY" secondItem="77z-lL-MMV" secondAttribute="centerY" id="nTV-Ra-IBD"/>
+                        <constraint firstItem="KWV-gr-x0o" firstAttribute="top" secondItem="77z-lL-MMV" secondAttribute="top" id="qcx-zD-GXs"/>
+                        <constraint firstItem="UzY-wU-7EA" firstAttribute="top" secondItem="77z-lL-MMV" secondAttribute="top" id="xDz-vi-tze"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="iYF-Mm-q6N"/>
+                            <exclude reference="nTV-Ra-IBD"/>
+                            <exclude reference="N16-KG-RpG"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="77z-lL-MMV" secondAttribute="bottom" id="BTr-By-57q"/>
                 <constraint firstItem="Im7-p2-Wvj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="G2s-JK-EEK"/>
                 <constraint firstItem="Td8-pV-AgU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Gbs-Wv-Emq"/>
+                <constraint firstItem="77z-lL-MMV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IkK-vL-LBe"/>
                 <constraint firstAttribute="trailing" secondItem="Td8-pV-AgU" secondAttribute="trailing" id="UbG-Vr-UT4"/>
                 <constraint firstAttribute="bottom" secondItem="Im7-p2-Wvj" secondAttribute="bottom" id="Zp8-Nx-fEl"/>
                 <constraint firstItem="Td8-pV-AgU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="j2Z-JU-1E7"/>
                 <constraint firstAttribute="trailing" secondItem="Im7-p2-Wvj" secondAttribute="trailing" id="kij-wB-Xlp"/>
                 <constraint firstItem="Im7-p2-Wvj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qjN-Uh-ed3"/>
+                <constraint firstAttribute="trailing" secondItem="77z-lL-MMV" secondAttribute="trailing" id="rez-OQ-YEX"/>
                 <constraint firstAttribute="bottom" secondItem="Td8-pV-AgU" secondAttribute="bottom" id="ycR-gz-xbs"/>
             </constraints>
             <connections>
                 <outlet property="button" destination="Td8-pV-AgU" id="ARW-jh-7n8"/>
+                <outlet property="editButton" destination="KWV-gr-x0o" id="g8b-XX-apn"/>
                 <outlet property="imageView" destination="Im7-p2-Wvj" id="59p-NB-OMf"/>
+                <outlet property="shareButton" destination="UzY-wU-7EA" id="7Me-M8-Kaw"/>
             </connections>
         </view>
     </objects>

@@ -125,6 +125,8 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         imageForSharingView?.button.addTarget(self, action: "imageForSharingViewButtonTouchUpInside", forControlEvents: .TouchUpInside)
         
+        imageForSharingView?.shareButton.addTarget(self, action: "shareButtonTouchUpInside", forControlEvents: .TouchUpInside)
+        
         let file = dict["file"] as! DBMetadata
         
         if file.filename.containsString("TITLE") {
@@ -171,6 +173,16 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         
         let destDir = "/Drop-Pix"
         restClient.uploadFile(filename, toPath: destDir, withParentRev: nil, fromPath: localPath)
+    }
+    
+    func shareButtonTouchUpInside() {
+        let shareString = "Check out this photo from my Dropbox!"
+        let shareImage: UIImage = (imageForSharingView?.imageView.image)!
+        
+        let objectsToShare = [shareString, shareImage]
+        let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+        
+        self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
     @IBAction func logoutBarButtonItemAction(sender: AnyObject) {

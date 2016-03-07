@@ -13,6 +13,9 @@ class ImageForSharingView: UIView {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var button: UIButton!
     
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
