@@ -7,21 +7,18 @@
 //
 
 import UIKit
+import MapKit
 
-class SettingsViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate  {
 
+    @IBOutlet weak var mapView: MKMapView!
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        parentViewController?.navigationItem.title = "Settings"
     }
 
     override func didReceiveMemoryWarning() {

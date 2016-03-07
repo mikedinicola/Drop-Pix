@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -79,10 +80,10 @@
             </objects>
             <point key="canvasLocation" x="360" y="385"/>
         </scene>
-        <!--Settings-->
+        <!--Map-->
         <scene sceneID="rUI-Gw-W1J">
             <objects>
-                <viewController id="QbK-6z-JGK" customClass="SettingsViewController" customModule="Drop_Pix" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QbK-6z-JGK" customClass="MapViewController" customModule="Drop_Pix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Yzu-XC-o8B"/>
                         <viewControllerLayoutGuide type="bottom" id="f2X-oC-cgs"/>
@@ -90,15 +91,32 @@
                     <view key="view" contentMode="scaleToFill" id="o6X-6J-JEx">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2Rz-xZ-E10">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <connections>
+                                    <outlet property="delegate" destination="QbK-6z-JGK" id="b7N-Ts-1dw"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Rz-xZ-E10" firstAttribute="leading" secondItem="o6X-6J-JEx" secondAttribute="leadingMargin" constant="-20" id="MFD-aE-Yn9"/>
+                            <constraint firstItem="2Rz-xZ-E10" firstAttribute="top" secondItem="Yzu-XC-o8B" secondAttribute="bottom" id="ktV-2K-uEI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2Rz-xZ-E10" secondAttribute="trailing" constant="-20" id="sFd-GZ-U3a"/>
+                            <constraint firstItem="f2X-oC-cgs" firstAttribute="top" secondItem="2Rz-xZ-E10" secondAttribute="bottom" id="xx9-dG-9Is"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" id="xev-eu-ppK"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="xev-eu-ppK"/>
+                    <connections>
+                        <outlet property="mapView" destination="2Rz-xZ-E10" id="fqr-aF-why"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DAg-37-mDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1907" y="1285"/>
         </scene>
-        <!--Photos-->
+        <!--List-->
         <scene sceneID="19N-rB-I1z">
             <objects>
                 <tableViewController id="ips-Tm-TuV" customClass="PhotosTableViewController" customModule="Drop_Pix" customModuleProvider="target" sceneMemberID="viewController">
@@ -141,7 +159,7 @@
                             <outlet property="delegate" destination="ips-Tm-TuV" id="h1r-JK-nJf"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Photos" id="DIG-yZ-73e"/>
+                    <tabBarItem key="tabBarItem" title="List" id="DIG-yZ-73e"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fjL-rr-j8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
