@@ -89,11 +89,16 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         
         restClient.loadFile(file.path, intoPath: localPath)
         
-        /*
-        TODO: Add this when titles are less ugly
-        cell.detailTextLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
-        cell.textLabel?.text = file.filename
-        */
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+        
+        if file.filename.containsString("TITLE") {
+            cell.textLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
+            cell.detailTextLabel?.text = ""
+        } else {
+            cell.textLabel?.text = file.filename.stringByReplacingOccurrencesOfString(".PNG", withString: "")
+            cell.detailTextLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
+        }
 
         if let image = dict["thumb"] as? UIImage {
             cell.imageView?.image = image
@@ -101,11 +106,6 @@ class PhotosTableViewController: UITableViewController, DBRestClientDelegate {
         } else {
             cell.imageView?.image = nil
         }
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        cell.textLabel?.text = dateFormatter.stringFromDate(file.lastModifiedDate)
-        cell.detailTextLabel?.text = ""
         
         return cell
     }
