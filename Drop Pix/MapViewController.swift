@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate  {
-
+    
     var _tabBarController: TabBarController!
     
     @IBOutlet weak var mapView: MKMapView!
@@ -19,14 +19,24 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "loadAnnotations", name: "DBLoadAnnotationsNotification", object: nil)
+        
         _tabBarController = tabBarController as! TabBarController
+        
+        loadAnnotations()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Custom Methods
+    
+    func loadAnnotations() {
         
         if _tabBarController.myContents != nil {
             for name in _tabBarController.fileNames {
@@ -37,18 +47,12 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
                     
                     let pointAnnotation = MKPointAnnotation()
                     pointAnnotation.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
-//                    pointAnnotation.title = name.componentsSeparatedByString(", ").first
                     pointAnnotation.title = name
                     
                     mapView.addAnnotation(pointAnnotation)
                 }
             }
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - MKMapViewDelegate
@@ -82,29 +86,29 @@ class MapViewController: UIViewController, MKMapViewDelegate  {
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         
-            let dict = _tabBarController.myContents[view.annotation!.title!!] as! [String: AnyObject]
-            
-            if dict["thumb"] != nil {
-                if _tabBarController.imageForSharingView != nil {
-                    
-                    let timer = NSTimer(timeInterval: 0.5, target: self, selector: "animateImageForSharingViewTimerCallback:", userInfo: ["dict": dict], repeats: false)
-                    NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
-                    
-                } else {
-                    
-                    _tabBarController.animateImageForSharingView(dict)
-                }
-            }            
+        let dict = _tabBarController.myContents[view.annotation!.title!!] as! [String: AnyObject]
+        
+        if dict["thumb"] != nil {
+            if _tabBarController.imageForSharingView != nil {
+                
+                let timer = NSTimer(timeInterval: 0.5, target: self, selector: "animateImageForSharingViewTimerCallback:", userInfo: ["dict": dict], repeats: false)
+                NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+                
+            } else {
+                
+                _tabBarController.animateImageForSharingView(dict)
+            }
+        }
     }
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

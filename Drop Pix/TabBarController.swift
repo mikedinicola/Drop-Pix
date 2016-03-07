@@ -87,6 +87,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
                 navigationItem.title = String(format: "%ld Photo", myContents.count)
             }
             NSNotificationCenter.defaultCenter().postNotificationName("DBTableViewReloadDataNotification", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("DBLoadAnnotationsNotification", object: nil)
         } else {
             navigationItem.title = "No Photos"
         }
@@ -254,6 +255,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
                 navigationItem.title = String(format: "%ld Photo", metadata.contents.count)
             }
             NSNotificationCenter.defaultCenter().postNotificationName("DBTableViewReloadDataNotification", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("DBLoadAnnotationsNotification", object: nil)
         } else {
             navigationItem.title = "No Photos"
         }
@@ -300,6 +302,7 @@ class TabBarController: UITabBarController, UIImagePickerControllerDelegate, UIN
         myContents[metadata.filename] = dict
         
         NSNotificationCenter.defaultCenter().postNotificationName("DBTableViewReloadDataNotification", object: nil)
+        NSNotificationCenter.defaultCenter().postNotificationName("DBLoadAnnotationsNotification", object: nil)
     }
     
     func restClient(client: DBRestClient!, loadThumbnailFailedWithError error: NSError!) {
